@@ -1,0 +1,63 @@
+// login.component.scss
+
+.inicarsesion-header {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #000000; // Color blanco para el texto
+  }
+  
+  .container {
+    background-color: #f5f5f5; // Fondo gris claro
+  
+    form {
+      max-width: 400px; // Aumenta el ancho del formulario
+      margin: 0 auto;
+      padding: 40px; // Aumenta el espacio interno del formulario
+      border-radius: 8px;
+      background-color: #fff; // Fondo blanco para el formulario
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); // Sombra ligera
+  
+      @media (max-width: 600px) {
+        padding: 20px; // Ajusta el espacio interno del formulario para pantallas más pequeñas
+      }
+    }
+  
+    .inputs {
+      margin-bottom: 20px; // Aumenta el espacio entre los elementos de entrada
+  
+      label {
+        display: block;
+        margin-bottom: 10px; // Aumenta el espacio entre las etiquetas y los campos de entrada
+        color: rgb(29, 206, 147); // Texto verde oscuro
+      }
+  
+      input {
+        width: 100%;
+        padding: 12px; // Aumenta el relleno de los campos de entrada
+        margin-bottom: 15px; // Aumenta el espacio entre los campos de entrada
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        border-color: #ccc; // Color del borde por defecto
+      }
+  
+      input.error {
+        border-color: #f00; // Color del borde en caso de error
+      }
+  
+      div {
+        color: #f00; // Color rojo para mensajes de error
+        margin-top: 5px; // Aumenta el espacio superior para separar los mensajes de error
+      }
+    }
+  
+    .btn-iniciar-sesion {
+      background-color: rgb(29, 206, 147); // Fondo verde oscuro
+      color: #fff; // Texto blanco
+      padding: 15px 20px; // Aumenta el relleno del botón
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+  }
+  
