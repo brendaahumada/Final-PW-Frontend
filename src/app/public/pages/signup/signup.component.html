@@ -1,1 +1,59 @@
-<p>signup works!</p>
+<div class="container">
+    <h1 class="Registrarse-header">Mi agenda virtual</h1>
+    <form (ngSubmit)="registrarse(form)" #form="ngForm" class="Registrarse-Form">
+      <div class="inputs">
+        <label for="Nombre">Nombre</label>
+        <input
+          type="text"
+          name="nombre"
+          id="nombre"
+          autocomplete="nombre"
+          placeholder="Ingese su nombre"
+          [(ngModel)]="authData.name"
+          #name="ngModel"
+        />
+      </div>
+      <div class="inputs">
+        <label for="Apellido">Apellido</label>
+        <input
+          type="text"
+          name="apellido"
+          id="apellido"
+          autocomplete="apellido"
+          placeholder="Ingrese su apellido"
+          [(ngModel)]="authData.lastName"
+          #lastName="ngModel"
+        />
+      </div>
+      <div class="inputs">
+        <label for="Email">Email</label>
+        <input
+          type="email"
+          name="email"
+          id="email"
+          autocomplete="email"
+          placeholder="Ingrese su email"
+          [(ngModel)]="authData.email"
+          #email="ngModel"
+          pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$"
+        />
+      </div>
+      <div class="inputs">
+        <label for="Password">Contraseña</label>
+        <input
+          type="password"
+          name="password"
+          id="password"
+          autocomplete="Contraseña"
+          placeholder="Ingrese su contraseña"
+          [(ngModel)]="authData.password"
+          [minLength]="6"
+          #password="ngModel"
+        />
+      </div>
+      <div>
+        <button class="btn-registro btn-guardar" type="submit">Guardar</button>
+        <button class="btn-registro btn-cancelar" [routerLink]="['/']">
+          Cancelar
+        </button>
+</div>
