@@ -1,7 +1,7 @@
 // contact.component.ts
 import { Component, OnInit } from '@angular/core';
 import { Contact } from 'src/app/Core/Interfaces/Contact';
-import { ContactService } from 'src/app/services/contact/contact.service';
+import { ContactsService } from 'src/app/services/contact/contact.service';
 
 @Component({
   selector: 'app-contact',
@@ -10,39 +10,76 @@ import { ContactService } from 'src/app/services/contact/contact.service';
 })
 export class ContactComponent implements OnInit {
   contacts: Contact[] = [];
-  // newContact: Contact = { name: '', email: '', celularNumber: , location:  };
+  showAddForm = false;
+  newContact: Contact = {
+    name: '',
+    lastName: '',
+    email: '',
+    celularNumber: null,
+    location: {
+      id: null,
+      latitude: null,
+      longitude: null,
+      description: 'Unknown',
+    },
+  };
 
-  constructor(private contactService: ContactService) {}
+  constructor(private contactsService: ContactsService) {}
 
   ngOnInit(): void {
-    this.getData();
+    // Obtener los contactos desde localStorage al iniciar la aplicación
+    const savedContacts = localStorage.getItem('contacts');
+    this.contacts = savedContacts ? JSON.parse(savedContacts) : [];
   }
 
-  async getData() {
-    try {
-      this.contacts = await this.contactService.getContacts();
-    } catch (err) {
-      console.log(err);
+  toggleAddForm(): void {
+    this.showAddForm = !this.showAddForm;
+    // Limpia los datos del nuevo contacto al alternar la visibilidad del formulario
+    if (!this.showAddForm) {
+      this.clearNewContact();
     }
-
-    console.log(this.contacts);
   }
 
-  // async addContact() {
-  //   try {
-  //     const result = await this.contactService.AddContact(this.newContact);
+  addContactFromForm(): void {
+    // Lógica para agregar el nuevo contacto al servicio
+    this.contactsService.addContact(this.newContact);
+  
+    // Actualiza la lista de contactos después de agregar un nuevo contacto
+    this.contacts = this.contactsService.getContacts();
+  
+    // Limpia los datos del nuevo contacto después de agregarlo
+    this.clearNewContact();
+  
+    // Oculta el formulario después de agregar el contacto
+    this.showAddForm = false;
+  }
 
-  //     if (result) {
-  //       console.log('Nuevo contacto agregado:', result);
-  //       // Actualiza la lista de contactos después de agregar uno nuevo
-  //       this.getData();
-  //       // Limpia el objeto newContact para permitir agregar más contactos
-  //       this.newContact = {  name: '', email: ''}
-  //     } else {
-  //       console.error('Error al agregar contacto');
-  //     }
-  //   } catch (err) {
-  //     console.error('Error al agregar contacto:', err);
-  //   }
-  // }
+  editContact(index: number): void {
+    // Buscar el contacto a editar usando el índice
+    const contactToEdit = this.contacts[index];
+  
+    // Verificar si se encontró el contacto
+    if (contactToEdit) {
+      // Asignar los datos del contacto al formulario de nuevo contacto
+      this.newContact = { ...contactToEdit };
+  
+      // Mostrar el formulario de agregar/editar
+      this.showAddForm = true;
+    }
+  }
+  
+  clearNewContact(): void {
+    this.newContact = {
+      name: '',
+      lastName: '',
+      email: '',
+      celularNumber: null,
+      location: {
+        id: null,
+        latitude: null,
+        longitude: null,
+        description: 'Unknown',
+      },
+    };
+  }
 }

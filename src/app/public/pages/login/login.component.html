@@ -5,6 +5,10 @@
   <div class="container">
     <form (ngSubmit)="login(form)" #form="ngForm">
       <div class="inputs">
+        <label for="name">Nombre</label>
+        <input type="text" name="name" id="name " placeholder="Ingrese su Nombre" >
+      </div>
+      <div class="inputs">
         <label for="email">Email</label>
         <input
           type="email"
@@ -36,11 +40,7 @@
           La contraseña no es válida (mínimo 3 caracteres).
         </div>
       </div>
-      <div class="inputs">
-        <label for="name">Nombre</label>
-        <input type="text" name="name" id="name " placeholder="Ingrese su Nombre" >
-      </div>
-  
+
       <div>
         <button class="btn-iniciar-sesion" type="submit" [disabled]="!form.valid">
           Iniciar sesión

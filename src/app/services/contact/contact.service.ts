@@ -1,62 +1,51 @@
+// contacts.service.ts
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import axios from 'axios';
+// import { Contact, Location } from './contact.model';
 import { Contact } from 'src/app/Core/Interfaces/Contact';
-import { BACKEND_URL } from 'src/app/Core/constant/backend';
+import { Location } from 'src/app/Core/Interfaces/location';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-export class ContactService {
-  token = JSON.parse(localStorage.getItem('session') || '{}').token;
-  config = {
-    headers: { Authorization: `Bearer ${this.token}` },
-  };
+export class ContactsService {
+  private contacts: Contact[] = [
+    {
+      id: 1,
+      name: 'John',
+      lastName: 'Doe',
+      email: 'john@example.com',
+      telephoneNumber: 1234567890,
+      celularNumber: 9876543210,
+      description: 'Friend',
+      avatar: 'john-avatar.jpg',
+      location: {
+        id: 1,
+        latitude: 40.7128,
+        longitude: -74.0060,
+        description: 'New York City',
+      },
+    },
+    // Add more contacts as needed
+  ];
 
-  constructor(private router: Router) {}
-
-  async getUserDetails(id: number) {
-    console.log('ok');
+  getContacts(): Contact[] {
+    return this.contacts;
   }
 
-  async getContacts(): Promise<Contact[]> {
-    const contacts = await axios.get(BACKEND_URL + '/api/contact', this.config);
-    return contacts.data;
+  addContact(newContact: Contact): void {
+    // Set id to null if not provided
+    newContact.id = newContact.id || null;
+    this.contacts.push(newContact);
   }
 
-  async getContact(id: number): Promise<Contact> {
-    const contact = await axios.get(
-      BACKEND_URL + '/api/contact/' + id,
-      this.config
-    );
-    console.log(contact.data);
-    return contact.data;
+  deleteContact(contactId: number): void {
+    this.contacts = this.contacts.filter((contact) => contact.id !== contactId);
   }
-
-  async deleteContact(id: number): Promise<boolean> {
-    const res = await axios.delete(
-      BACKEND_URL + '/api/contact/' + id,
-      this.config
-    );
-    return res.status == 200;
+  updateContact(contactId: number, updatedContact: Contact): void {
+    const index = this.contacts.findIndex(contact => contact.id === contactId);
+    if (index !== -1) {
+      this.contacts[index] = { ...this.contacts[index], ...updatedContact };
+    }
   }
-
-  async updateContact(id: number, c: Contact): Promise<Contact> {
-    const res = await axios.put(
-      BACKEND_URL + '/api/contact/' + id,
-      c,
-      this.config
-    );
-    return res.data;
-  }
-
-  async AddContact(c: Contact): Promise<Contact> {
-    const contact = await axios.post(
-      BACKEND_URL + '/api/contact',
-      c,
-      this.config
-    );
-    return contact.data;
-  }
-
+  
 }
