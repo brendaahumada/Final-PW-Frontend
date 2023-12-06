@@ -8,6 +8,10 @@ import { LoginComponent } from './public/pages/login/login.component';
 
 // Archivo que maneja el ruteo de toda la app o páginas
 const routes: Routes = [
+  { path: '',
+   redirectTo: '/contacts',
+   pathMatch: 'full'
+   },
   {
     path: "",
     component:HomeComponent

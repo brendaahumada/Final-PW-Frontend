@@ -1,14 +1,19 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import { iAuthRequest } from 'src/app/Core/Interfaces/auth';
-import { ISession } from 'src/app/Core/Interfaces/session';
 import { BACKEND_URL } from 'src/app/Core/constant/backend';
+import { ISession } from 'src/app/Core/Interfaces/session';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-
   private loggedIn: boolean = false;
+
+  private apiUrl = BACKEND_URL + '/api/Authentication'; // Ajusta según tu estructura de rutas
+
+  constructor(private http: HttpClient) {}
 
   async login(authentication: iAuthRequest): Promise<boolean> {
     const res = await fetch(BACKEND_URL + '/api/Authentication/authenticate', {
@@ -24,19 +29,6 @@ export class AuthService {
     // this.loggedIn = true;
     return true;
   }
-
-  isLoggedIn() {
-    return this.loggedIn;
-  }
-
-  getSession(): ISession {
-    const item: string = localStorage.getItem('session') || 'invalid';
-    if (item !== 'invalid') {
-      return JSON.parse(item);
-    }
-    return { expiresIn: '', token: '' };
-  }
-
   setSession(token: any, expiresTimeHours: number = 24) {
     const date = new Date();
     date.setHours(date.getHours() + expiresTimeHours);
@@ -48,23 +40,7 @@ export class AuthService {
 
     localStorage.setItem('session', JSON.stringify(session));
   }
-
-  async getMe() {
-    const res = await fetch('', {
-      headers: {
-        Authorization: this.getSession().token!,
-      },
-    });
-    return await res.json();
-  }
-
-  resetSession() {
-    localStorage.removeItem('session');
-    this.loggedIn = false;
-    window.location.reload();
-  }
-
-  async registrarse(authentication: iAuthRequest): Promise<boolean> {
+  async register(authentication: iAuthRequest): Promise<boolean> {
     const res = await fetch(BACKEND_URL + '/api/Authentication/authenticate', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -78,4 +54,5 @@ export class AuthService {
     this.loggedIn = true;
     return true;
   }
+  
 }

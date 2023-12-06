@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { HttpClientModule } from '@angular/common/http'; //
 import { ContactComponent } from './public/pages/contact/contact.component';
 import { CommonModule } from '@angular/common';
 import { TabsComponent } from './public/components/tabs/tabs.component';
@@ -23,6 +24,7 @@ import { AddContactComponent } from './public/components/add-contact/add-contact
   ],
   imports: [
     BrowserModule,
+    HttpClientModule, 
     AppRoutingModule,
     FormsModule,
     CommonModule
