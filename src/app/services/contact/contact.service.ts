@@ -1,51 +1,74 @@
 // contacts.service.ts
 import { Injectable } from '@angular/core';
-// import { Contact, Location } from './contact.model';
+
 import { Contact } from 'src/app/Core/Interfaces/Contact';
 import { Location } from 'src/app/Core/Interfaces/location';
+import { AuthService } from '../auth/auth.service';
+import { BACKEND_URL } from 'src/app/Core/constant/backend';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ContactsService {
-  private contacts: Contact[] = [
-    {
-      id: 1,
-      name: 'John',
-      lastName: 'Doe',
-      email: 'john@example.com',
-      telephoneNumber: 1234567890,
-      celularNumber: 9876543210,
-      description: 'Friend',
-      avatar: 'john-avatar.jpg',
-      location: {
-        id: 1,
-        latitude: 40.7128,
-        longitude: -74.0060,
-        description: 'New York City',
+export class ContactService {
+  constructor(private auth:AuthService) {}
+
+  async getContactDetails(id: number): Promise<Contact> {
+    const data = await fetch(BACKEND_URL+'/api/Contact/'+ id,{
+      method: 'GET',
+      headers: {
+        'Content-type': 'application/json',
+        'Authorization' :  `Bearer ${this.auth.getSession().token!}` ////******************* */
       },
-    },
-    // Add more contacts as needed
-  ];
-
-  getContacts(): Contact[] {
-    return this.contacts;
+    });
+    return await data.json();
   }
 
-  addContact(newContact: Contact): void {
-    // Set id to null if not provided
-    newContact.id = newContact.id || null;
-    this.contacts.push(newContact);
+  async getContacts(): Promise<Contact[]> {
+    const data = await fetch(BACKEND_URL+'/api/Contact',{
+      method: 'GET',
+      headers: {
+        'Content-type': 'application/json',
+        'Authorization' :  `Bearer ${this.auth.getSession().token!}`
+      },
+    });
+    return await data.json();
   }
 
-  deleteContact(contactId: number): void {
-    this.contacts = this.contacts.filter((contact) => contact.id !== contactId);
+  async editContact(contact: Contact): Promise<boolean>  {
+    console.log('Enviando edit de usuario a la api');
+    const res = await fetch(BACKEND_URL+'/api/Contact/'+ (contact.id), {
+      method: 'PUT',
+      body: JSON.stringify(contact),
+      headers: {
+        'Content-type': 'application/json',
+        'Authorization' :  `Bearer ${this.auth.getSession().token!}`
+      },
+    });
+    return res.ok;
   }
-  updateContact(contactId: number, updatedContact: Contact): void {
-    const index = this.contacts.findIndex(contact => contact.id === contactId);
-    if (index !== -1) {
-      this.contacts[index] = { ...this.contacts[index], ...updatedContact };
-    }
+
+  async addContact(contact: Contact){
+    console.log('Enviando edit de usuario a la api');
+    const res = await fetch(BACKEND_URL+'/api/Contact', {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json',
+        'Authorization' :  `Bearer ${this.auth.getSession().token!}`
+      },
+      body: JSON.stringify(contact),
+    });
+    return await res.json();
+  }
+
+  async deleteContact(id:number):Promise<boolean>{
+    const res = await fetch(BACKEND_URL+'/api/Contact/'+id, {
+      method: 'DELETE',
+      headers: {
+        'Content-type': 'application/json',
+        'Authorization' :  `Bearer ${this.auth.getSession().token!}`
+      },
+    });
+    return res.ok;
   }
   
 }

@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
 import { iAuthRequest } from 'src/app/Core/Interfaces/auth';
 import { BACKEND_URL } from 'src/app/Core/constant/backend';
 import { ISession } from 'src/app/Core/Interfaces/session';
+import { Router } from '@angular/router';
+
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class AuthService {
 
   private apiUrl = BACKEND_URL + '/api/Authentication'; // Ajusta según tu estructura de rutas
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router:Router) {}
 
   async login(authentication: iAuthRequest): Promise<boolean> {
     const res = await fetch(BACKEND_URL + '/api/Authentication/authenticate', {
@@ -53,6 +54,18 @@ export class AuthService {
     this.setSession(token);
     this.loggedIn = true;
     return true;
+  }
+  getSession(): ISession {
+    const item: string = localStorage.getItem('session') || 'invalid';
+    if (item !== 'invalid') {
+      return JSON.parse(item);
+    }
+    return { expiresIn: '', token: '' };
+  }
+  resetSession() {
+    localStorage.removeItem('session');
+    this.loggedIn = false;
+    this.router.navigate(['/login']);
   }
   
 }

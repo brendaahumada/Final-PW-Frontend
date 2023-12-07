@@ -1,1 +1,34 @@
-<p>add-contact works!</p>
+<form (ngSubmit)="agregarContacto()" #contactoForm="ngForm">
+    <!-- Agrega los campos del formulario -->
+    <label for="nombre">Nombre:</label>
+    <input type="text" id="nombre" [(ngModel)]="nuevoContacto.name" name="nombre" required>
+  
+    <label for="apellido">Apellido:</label>
+    <input type="text" id="apellido" [(ngModel)]="nuevoContacto.lastName" name="apellido" required>
+  
+    <label for="descripcion">Descripción Usuario:</label>
+    <input type="text" id="descripcion" [(ngModel)]="nuevoContacto.description" name="descripcion" required>
+  
+    <label for="email">Email:</label>
+    <input type="text" id="email" [(ngModel)]="nuevoContacto.email" name="email" required>
+  
+    <label for="celular">Número de Celular:</label>
+    <input type="text" id="celular" [(ngModel)]="nuevoContacto.celularNumber" name="celular" required>
+  
+    <label for="telefono">Número de Teléfono:</label>
+    <input type="text" id="telefono" [(ngModel)]="nuevoContacto.telephoneNumber" name="telefono" required>
+  
+    <label for="latitud">Ubicación (Latitud):</label>
+    <input type="text" id="latitud" [(ngModel)]="nuevoContacto.location.latitude" name="latitud" required>
+  
+    <label for="longitud">Ubicación (Longitud):</label>
+    <input type="text" id="longitud" [(ngModel)]="nuevoContacto.location.longitude" name="longitud" required>
+  
+    <label for="descripcionUbicacion">Descripción de la Ubicación:</label>
+    <input type="text" id="descripcionUbicacion" [(ngModel)]="nuevoContacto.location.description" name="descripcionUbicacion" required>
+  
+    <!-- Agrega otros campos según sea necesario -->
+  
+    <button type="submit">Agregar Contacto</button>
+  </form>
+  

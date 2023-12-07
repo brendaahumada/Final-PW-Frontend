@@ -6,8 +6,7 @@ export interface Contact {
   email?: string;
   telephoneNumber?: number | null;
   celularNumber: number | null;
-  description?: string;
-  avatar?: string;
+  description: string;
   location: Location;
 }
 

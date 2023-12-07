@@ -1,69 +1,45 @@
-.contacts {
-  padding: 20px;
+/* contact.component.scss */
 
-  .h1 {
-    margin-bottom: 20px;
-    h1 {
-      font-size: 24px;
-      color: #333;
-    }
+.contact {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 15px;
+
+  h3 {
+    color: #333;
   }
 
-  .add-form {
-    margin-bottom: 20px;
+  ul {
+    list-style: none;
+    padding: 0;
 
-    h2 {
-      font-size: 20px;
-      color: #333;
-      margin-bottom: 10px;
-    }
+    li {
+      margin-bottom: 8px;
 
-    form {
-      label {
-        display: block;
-        margin-bottom: 5px;
-        font-weight: bold;
-      }
-
-      input {
-        width: 100%;
-        padding: 8px;
-        margin-bottom: 10px;
-        box-sizing: border-box;
-      }
-
-      button {
-        background-color: #007bff;
-        color: #fff;
-        padding: 10px;
-        cursor: pointer;
-        border: none;
-        border-radius: 5px;
-        font-size: 16px;
-        margin-right: 10px;
-
-        &:hover {
-          background-color: #0056b3;
-        }
+      strong {
+        margin-right: 5px;
       }
     }
   }
+}
 
-  .contact-info {
-    border: 1px solid #ddd;
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 5px;
+/* Estilos para el mensaje de "No hay contactos disponibles" */
+#noContacts {
+  color: #888;
+  font-style: italic;
+}
 
-    h3 {
-      font-size: 18px;
-      margin-bottom: 5px;
-      color: #333;
-    }
+/* Estilos para el botón de cerrar sesión */
+button {
+  margin-top: 15px;
+  padding: 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
 
-    p {
-      margin: 5px 0;
-      color: #666;
-    }
+  &:hover {
+    background-color: #0056b3;
   }
 }

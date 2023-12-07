@@ -1,6 +1,6 @@
-// add-contact.component.ts
-import { Component, Output, EventEmitter } from '@angular/core';
-import { Contact } from 'src/app/Core/Interfaces/Contact';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { ContactService } from 'src/app/services/contact/contact.service';
 
 @Component({
   selector: 'app-add-contact',
@@ -8,47 +8,27 @@ import { Contact } from 'src/app/Core/Interfaces/Contact';
   styleUrls: ['./add-contact.component.scss']
 })
 export class AddContactComponent {
-  @Output() addContact = new EventEmitter<Contact>();
-  newContact: Contact = {
-    name: '',
-    lastName: '',
-    email: '',
-    celularNumber: null,
-    location: {
-      id: null,
-      latitude: null,
-      longitude: null,
-      description: 'Unknown',
-    },
+  nuevoContacto: any = {
+    location: {}  // Corrección: utiliza "=" para asignar un objeto vacío
   };
 
-  // Lógica para agregar un nuevo contacto
-  onSubmit(): void {
-    // Verifica si los campos requeridos están llenos
-    if (this.newContact.name && this.newContact.email) {
-      // Emitir el evento para agregar el nuevo contacto
-      this.addContact.emit(this.newContact);
+  constructor(private contactService: ContactService, private router: Router) {}
 
-      // Limpia los datos del nuevo contacto después de agregarlo
-      this.clearNewContact();
-    } else {
-      // Puedes manejar aquí el caso en el que los campos requeridos no estén llenos
-      console.error('Nombre y correo electrónico son campos obligatorios');
+  async agregarContacto() {
+    try {
+      // Lógica para enviar el nuevo contacto al backend
+      const nuevoContactoAgregado = await this.contactService.addContact(this.nuevoContacto);
+      
+      // Puedes manejar la respuesta del servidor aquí
+      console.log('Nuevo contacto agregado:', nuevoContactoAgregado);
+
+      // Limpiar el formulario o hacer otras acciones necesarias
+      this.nuevoContacto = {};
+
+      // Redirigir a la página de contactos después de agregar el contacto
+      this.router.navigate(['/contact']);
+    } catch (error) {
+      console.error('Error al agregar el contacto', error);
     }
-  }
-
-  clearNewContact(): void {
-    this.newContact = {
-      name: '',
-      lastName: '',
-      email: '',
-      celularNumber: null,
-      location: {
-        id: null,
-        latitude: null,
-        longitude: null,
-        description: 'Unknown',
-      },
-    };
   }
 }

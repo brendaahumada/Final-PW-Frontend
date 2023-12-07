@@ -44,7 +44,7 @@ export class SignupComponent implements OnInit {
           email: this.authData.email,
           password: this.authData.password,
         });
-        this.router.navigate(['/contacts']);
+        this.router.navigate(['/contact']);
       } catch (err) {
         console.log(err);
       }
