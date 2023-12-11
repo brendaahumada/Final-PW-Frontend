@@ -1,6 +1,6 @@
 import { Location } from "./location";
 export interface Contact {
-  id?: number | null;
+  id?: number;
   name: string;
   lastName?: string;
   email?: string;

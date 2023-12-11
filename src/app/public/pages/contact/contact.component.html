@@ -4,19 +4,17 @@
   <h2>Mis Contactos</h2>
   <ul>
     <li *ngFor="let contacto of contactos">
-      <div class="contact">
-        <h3>Contacto {{ contacto.id }}</h3>
-        <ul>
-          <li><strong>Nombre:</strong> {{ contacto.name }}</li>
-          <li><strong>Apellido:</strong> {{ contacto.lastName }}</li>
-          <li><strong>Descripción:</strong> {{ contacto?.description }}</li>
-          <li><strong>Email:</strong> {{ contacto.email }}</li>
-          <li><strong>Número de celular:</strong> {{ contacto.celularNumber }}</li>
-          <li><strong>Número de teléfono:</strong> {{ contacto.telephoneNumber }}</li>
-          <li><strong>Ubicación:</strong> {{ contacto.location.description }}</li>
-          <!-- Agrega más propiedades según sea necesario -->
-        </ul>
-      </div>
+      <!-- Enlace que envuelve todo el contenido del contacto -->
+      <a (click)="verDetalles(contacto)">
+        <div class="contact">
+          <h3>Contacto {{ contacto.id }}</h3>
+          <!-- Solo mostrar Nombre y Apellido en la vista principal -->
+          <ul>
+            <li><strong>Nombre:</strong> {{ contacto.name }}</li>
+            <li><strong>Apellido:</strong> {{ contacto.lastName }}</li>
+          </ul>
+        </div>
+      </a>
     </li>
   </ul>
 </div>
@@ -27,4 +25,3 @@
 
 <button (click)="logOut()">Cerrar sesión</button>
 <button (click)="agregarContacto()">Agregar Nuevo Contacto</button>
-

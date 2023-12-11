@@ -1,20 +1,21 @@
-/* contact.component.scss */
+// contact.component.scss
 
-.contact {
+// Estilos generales del componente
+div.contact {
   border: 1px solid #ccc;
   padding: 10px;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 
   h3 {
     color: #333;
   }
 
   ul {
-    list-style: none;
+    list-style-type: none;
     padding: 0;
 
     li {
-      margin-bottom: 8px;
+      margin-bottom: 5px;
 
       strong {
         margin-right: 5px;
@@ -23,23 +24,31 @@
   }
 }
 
-/* Estilos para el mensaje de "No hay contactos disponibles" */
-#noContacts {
-  color: #888;
-  font-style: italic;
-}
-
-/* Estilos para el botón de cerrar sesión */
-button {
-  margin-top: 15px;
-  padding: 10px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
+// Estilos para el enlace que envuelve el contacto
+a {
+  text-decoration: none;
+  color: #007bff;
   cursor: pointer;
-  font-size: 16px;
 
   &:hover {
-    background-color: #0056b3;
+    text-decoration: underline;
   }
+}
+
+// Estilos para los botones
+button {
+  margin-top: 10px;
+  padding: 8px 16px;
+  font-size: 14px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #007bff;
+    color: #fff;
+  }
+}
+
+// Estilos para el mensaje cuando no hay contactos disponibles
+p {
+  color: #999;
 }

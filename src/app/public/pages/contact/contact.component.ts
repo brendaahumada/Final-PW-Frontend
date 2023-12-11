@@ -28,6 +28,10 @@ export class ContactComponent  {
     this.auth.resetSession();
 
   }
+  verDetalles(contacto: Contact) {
+    // Navegar a la página de detalles del contacto
+    this.router.navigate(['/contact', contacto.id]);
+  }
   
   agregarContacto() {
     // Navegar a la página "agregar-contacto"

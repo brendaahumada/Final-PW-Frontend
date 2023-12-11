@@ -6,13 +6,19 @@ import { LocationComponent } from './public/pages/location/location.component';
 import { SignupComponent } from './public/pages/signup/signup.component';
 import { LoginComponent } from './public/pages/login/login.component';
 import { AddContactComponent } from './public/components/add-contact/add-contact.component';
+import { ContactDetailsComponent } from './public/pages/contact-details/contact-details.component';
+import { EditContactComponent } from './public/components/edit-contact/edit-contact.component';
 
 // Archivo que maneja el ruteo de toda la app o páginas
 const routes: Routes = [
-  { path: '',
-   redirectTo: '/contacts',
-   pathMatch: 'full'
-   },
+  {
+    path:'contact/:id',
+    component :ContactDetailsComponent
+  },
+  {
+    path: 'edit-contact/:id', // Asegúrate de que el parámetro sea :id
+    component: EditContactComponent
+  },
   {
     path: "",
     component:HomeComponent

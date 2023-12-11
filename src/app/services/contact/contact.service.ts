@@ -11,27 +11,65 @@ import { BACKEND_URL } from 'src/app/Core/constant/backend';
 })
 export class ContactService {
   constructor(private auth:AuthService) {}
+  
+
+  private contactos: Contact[] = [
+    {
+      id: 1,
+      name: 'Contacto Harcodeado',
+      lastName: 'Apellido Harcodeado',
+      email: 'contacto@harcodeado.com',
+      telephoneNumber: 1234567890,
+      celularNumber: 9876543210,
+      description: 'Descripción del contacto harcodeado',
+      location: { latitude: 345222, longitude: -43324, description:'pais harcodeado' },
+    },
+    {
+      id: 2,
+      name: ' Brenda Leonela',
+      lastName: 'Ahumada',
+      email: 'brendaahumada2019@gmail.com',
+      telephoneNumber: 1234567890,
+      celularNumber: 9876543210,
+      description: 'Amigas',
+      location: { latitude: 345222, longitude: -43324, description:'pais harcodeado' },
+    },
+  ];
 
   async getContactDetails(id: number): Promise<Contact> {
-    const data = await fetch(BACKEND_URL+'/api/Contact/'+ id,{
-      method: 'GET',
-      headers: {
-        'Content-type': 'application/json',
-        'Authorization' :  `Bearer ${this.auth.getSession().token!}` ////******************* */
-      },
-    });
-    return await data.json();
+    // Aquí puedes agregar lógica para obtener detalles de un contacto específico,
+    // por ahora, simplemente filtramos el contacto por id en la lista harcodeada.
+    const contacto = this.contactos.find((c) => c.id === id);
+    if (contacto) {
+      return Promise.resolve(contacto);
+    } else {
+      return Promise.reject('Contacto no encontrado');
+    }
   }
 
+
+  // async getContactDetails(id: number): Promise<Contact> {
+  //   const data = await fetch(BACKEND_URL+'/api/Contact/'+ id,{
+  //     method: 'GET',
+  //     headers: {
+  //       'Content-type': 'application/json',
+  //       'Authorization' :  `Bearer ${this.auth.getSession().token!}` ////******************* */
+  //     },
+  //   });
+  //   return await data.json();
+  // }
+
   async getContacts(): Promise<Contact[]> {
-    const data = await fetch(BACKEND_URL+'/api/Contact',{
-      method: 'GET',
-      headers: {
-        'Content-type': 'application/json',
-        'Authorization' :  `Bearer ${this.auth.getSession().token!}`
-      },
-    });
-    return await data.json();
+    // const data = await fetch(BACKEND_URL+'/api/Contact',{
+    //   method: 'GET',
+    //   headers: {
+    //     'Content-type': 'application/json',
+    //     'Authorization' :  `Bearer ${this.auth.getSession().token!}`
+    //   },
+    // });
+    // return await data.json();
+    return Promise.resolve(this.contactos);
+
   }
 
   async editContact(contact: Contact): Promise<boolean>  {
