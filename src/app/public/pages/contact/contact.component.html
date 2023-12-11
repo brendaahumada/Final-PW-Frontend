@@ -7,12 +7,7 @@
       <!-- Enlace que envuelve todo el contenido del contacto -->
       <a (click)="verDetalles(contacto)">
         <div class="contact">
-          <h3>Contacto {{ contacto.id }}</h3>
-          <!-- Solo mostrar Nombre y Apellido en la vista principal -->
-          <ul>
-            <li><strong>Nombre:</strong> {{ contacto.name }}</li>
-            <li><strong>Apellido:</strong> {{ contacto.lastName }}</li>
-          </ul>
+          <h3>{{contacto.name}} {{contacto.lastName}}</h3>
         </div>
       </a>
     </li>

@@ -1,9 +1,9 @@
 <!-- detalles-contacto.component.html -->
 <div *ngIf="contacto">
-  <h2>Detalles del Contacto</h2>
-  <p>ID: {{ contacto.id }}</p>
-
-  <div *ngIf="!isEditing">
+    <h2>Detalles del Contacto</h2>
+    <!-- <p>ID: {{ contacto.id }}</p> -->
+  
+    <div *ngIf="!isEditing">
       <p>Nombre: {{ contacto.name }}</p>
       <p>Apellido: {{ contacto.lastName }}</p>
       <p>Correo: {{ contacto.email }}</p>
@@ -11,45 +11,54 @@
       <p>Celular: {{ contacto.celularNumber }}</p>
       <p>Descripción: {{ contacto.description }}</p>
       <p>Ubicación: {{ contacto.location.longitude }}, {{ contacto.location.latitude }}, {{ contacto.location.description }}</p>
-  </div>
-
-  <div *ngIf="isEditing">
+    </div>
+  
+    <div *ngIf="isEditing">
       <!-- Formulario para editar el contacto -->
       <form (ngSubmit)="saveChanges()">
-          <label for="name">Nombre:</label>
-          <input type="text" id="name" [(ngModel)]="contacto.name" name="name" required>
-
-          <label for="lastName">Apellido:</label>
-          <input type="text" id="lastName" [(ngModel)]="contacto.lastName" name="lastName" required>
-
-          <label for="email">Correo:</label>
-          <input type="email" id="email" [(ngModel)]="contacto.email" name="email" required>
-
-          <label for="telephoneNumber">Teléfono:</label>
-          <input type="text" id="telephoneNumber" [(ngModel)]="contacto.telephoneNumber" name="telephoneNumber" required>
-
-          <label for="celularNumber">Celular:</label>
-          <input type="text" id="celularNumber" [(ngModel)]="contacto.celularNumber" name="celularNumber" required>
-
-          <label for="description">Descripción:</label>
-          <textarea id="description" [(ngModel)]="contacto.description" name="description" required></textarea>
-
-          <label for="longitude">Longitud:</label>
-          <input type="text" id="longitude" [(ngModel)]="contacto.location.longitude" name="longitude" required>
-
-          <label for="latitude">Latitud:</label>
-          <input type="text" id="latitude" [(ngModel)]="contacto.location.latitude" name="latitude" required>
-
-          <label for="locationDescription">Descripción de ubicación:</label>
-          <input type="text" id="locationDescription" [(ngModel)]="contacto.location.description" name="locationDescription" required>
-
-          <button type="button" (click)="cancelEditing()">Cancelar</button>
-          <button type="submit">Guardar cambios</button>
+        <label for="name">Nombre:</label>
+        <input type="text" id="name" [(ngModel)]="contacto.name" name="name" required>
+  
+        <label for="lastName">Apellido:</label>
+        <input type="text" id="lastName" [(ngModel)]="contacto.lastName" name="lastName" required>
+  
+        <label for="email">Correo:</label>
+        <input type="email" id="email" [(ngModel)]="contacto.email" name="email" required>
+  
+        <label for="telephoneNumber">Teléfono:</label>
+        <input type="text" id="telephoneNumber" [(ngModel)]="contacto.telephoneNumber" name="telephoneNumber" required>
+  
+        <label for="celularNumber">Celular:</label>
+        <input type="text" id="celularNumber" [(ngModel)]="contacto.celularNumber" name="celularNumber" required>
+  
+        <label for="description">Descripción:</label>
+        <textarea id="description" [(ngModel)]="contacto.description" name="description" required></textarea>
+  
+        <label for="longitude">Longitud:</label>
+        <input type="text" id="longitude" [(ngModel)]="contacto.location.longitude" name="longitude" required>
+  
+        <label for="latitude">Latitud:</label>
+        <input type="text" id="latitude" [(ngModel)]="contacto.location.latitude" name="latitude" required>
+  
+        <label for="locationDescription">Descripción de ubicación:</label>
+        <input type="text" id="locationDescription" [(ngModel)]="contacto.location.description" name="locationDescription" required>
+  
+        <button type="button" (click)="cancelEditing()">Cancelar</button>
+        <button type="submit">Guardar cambios</button>
       </form>
+    </div>
+  
+    <div *ngIf="showToast" class="toastify">
+      {{ toastMessage }}
+    </div>
+  
+    <button *ngIf="!isEditing" (click)="startEditing()">Editar Contacto</button>
+    <button *ngIf="!isEditing" (click)="mostrarModalEliminar()">Eliminar Contacto</button>
+  
+    <!-- Modal de eliminación -->
+    <div *ngIf="mostrarModal" class="modal">
+      <p>¿Estás seguro de que deseas eliminar este contacto?</p>
+      <button (click)="eliminarContacto()">Eliminar</button>
+      <button (click)="ocultarModal()">Cancelar</button>
+    </div>
   </div>
-
-  <div *ngIf="!isEditing">
-      <button (click)="startEditing()">Editar Contacto</button>
-      <button (click)="deleteContact()">Eliminar Contacto</button>
-  </div>
-</div>

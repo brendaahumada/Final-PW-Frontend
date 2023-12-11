@@ -1,1 +1,20 @@
-<p>location works!</p>
+<!-- location.component.html -->
+
+<div *ngIf="Location.length > 0; else noLocations">
+    <ul>
+      <li *ngFor="let location of Location">
+        <!-- Agregar un contenedor clickeable -->
+        <div class="location" (click)="verDetalles(location)">
+          <!-- <p>Nombre Contacto: {{ location.contact?.name }}</p> -->
+          <p>Description: {{ location.description }}</p>
+          <p>Latitud: {{ location.latitude }}</p>
+          <p>Longitud: {{ location.longitude }}</p>
+        </div>
+      </li>
+    </ul>
+  </div>
+  
+  <ng-template #noLocations>
+    <p>No hay ubicaciones disponibles.</p>
+  </ng-template>
+  

@@ -8,39 +8,45 @@ import { LoginComponent } from './public/pages/login/login.component';
 import { AddContactComponent } from './public/components/add-contact/add-contact.component';
 import { ContactDetailsComponent } from './public/pages/contact-details/contact-details.component';
 import { EditContactComponent } from './public/components/edit-contact/edit-contact.component';
+import { LocationDetailsComponent } from './public/pages/location-details/location-details.component';
 
 // Archivo que maneja el ruteo de toda la app o páginas
 const routes: Routes = [
-  {
+{ path: 'location/:id', 
+  component: LocationDetailsComponent 
+},
+{
     path:'contact/:id',
     component :ContactDetailsComponent
-  },
-  {
-    path: 'edit-contact/:id', // Asegúrate de que el parámetro sea :id
+},
+{
+    path: 'edit-contact/:id',
     component: EditContactComponent
-  },
-  {
+},
+{
     path: "",
     component:HomeComponent
-  },
-  {
+},
+{
     path: "contact",
     component: ContactComponent
-  },
-  {
+},
+{
     path: "location",
     component:LocationComponent
-  },
-  {
+},
+{
     path:"signup",
     component:SignupComponent
 
-  },
-  {
+},
+{
     path:"login",
     component:LoginComponent
-  }, 
-  { path: 'agregar-contacto', component: AddContactComponent },
+}, 
+{ path: 'agregar-contacto', 
+component: AddContactComponent 
+},
 ];
 
 @NgModule({

@@ -12,18 +12,22 @@ import { SignupComponent } from './public/pages/signup/signup.component';
 import { AddContactComponent } from './public/components/add-contact/add-contact.component';
 import { ContactComponent } from './public/pages/contact/contact.component';
 import { ContactDetailsComponent } from './public/pages/contact-details/contact-details.component';
+import { LocationComponent } from './public/pages/location/location.component';
+import { LocationDetailsComponent } from './public/pages/location-details/location-details.component';
 
 
 
 @NgModule({
   declarations: [
+    LocationComponent,
     AppComponent,
     TabsComponent,
     LoginComponent,
     SignupComponent,
     ContactComponent,
     AddContactComponent,
-    ContactDetailsComponent
+    ContactDetailsComponent,
+    LocationDetailsComponent
 
   ],
   imports: [

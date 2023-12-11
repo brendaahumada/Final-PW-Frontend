@@ -1,5 +1,3 @@
-// add-contact.component.ts
-
 import { Component } from '@angular/core';
 import { Route, Router } from '@angular/router';
 import { Contact } from 'src/app/Core/Interfaces/Contact';
