@@ -1,5 +1,3 @@
-<!-- contact.component.html -->
-
 <div *ngIf="contactos.length > 0; else noContacts">
   <h2>Mis Contactos</h2>
   <ul>
@@ -18,5 +16,6 @@
   <p>No hay contactos disponibles.</p>
 </ng-template>
 
-<button (click)="logOut()">Cerrar sesión</button>
-<button (click)="agregarContacto()">Agregar Nuevo Contacto</button>
+<button (click)="logOut()" class="logout-button">Cerrar sesión</button>
+<button (click)="agregarContacto()" class="add-contact-button">Agregar Nuevo Contacto</button>
+

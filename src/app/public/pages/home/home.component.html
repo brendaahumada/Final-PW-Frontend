@@ -1,16 +1,14 @@
+<!-- home.component.html -->
 <div class="my-container">
-    <h1>Mi agenda virtual</h1>
-    
-    <!-- Otro contenido de tu componente -->
+  <h1>
+    Bienvenida/o a su agenda virtual
+  </h1>
   
-    <!-- Texto si ya tienes una cuenta -->
-    <p *ngIf="!authService.isAuthenticatedUser()">
-      ¿Ya tienes una cuenta? <a (click)="navigateTo('/login')">Iniciar Sesión</a>
-    </p>
-  
-    <!-- Texto si ya tienes cuenta -->
-    <p *ngIf="authService.isAuthenticatedUser()">
-      Ya tienes cuenta, ¿quieres <a (click)="navigateTo('/signup')">registrarte</a> con una nueva cuenta?
-    </p>
-  </div>
-  
+  <h2>
+    Ya tienes una cuenta? <a (click)="navigateTo('/login')">Iniciar Sesión</a>
+  </h2>
+  <h2>
+    No posees una cuenta? <a (click)="navigateTo('/signup')">Registrarte</a>
+  </h2>
+
+</div>

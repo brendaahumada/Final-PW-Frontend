@@ -14,11 +14,13 @@ import { ContactComponent } from './public/pages/contact/contact.component';
 import { ContactDetailsComponent } from './public/pages/contact-details/contact-details.component';
 import { LocationComponent } from './public/pages/location/location.component';
 import { LocationDetailsComponent } from './public/pages/location-details/location-details.component';
+import { HomeComponent } from './public/pages/home/home.component';
 
 
 
 @NgModule({
   declarations: [
+    HomeComponent,
     LocationComponent,
     AppComponent,
     TabsComponent,

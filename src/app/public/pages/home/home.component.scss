@@ -1,0 +1,30 @@
+.my-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+  
+    h1 {
+      font-size: 2em;
+      margin-bottom: 20px;
+      color: #3498db;
+    }
+  
+    p {
+      font-size: 1.2em;
+      margin-top: 10px;
+    }
+  
+    a {
+      color: #e74c3c;
+      text-decoration: none;
+      font-weight: bold;
+  
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+  

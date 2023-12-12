@@ -55,7 +55,7 @@
     <button *ngIf="!isEditing" (click)="startEditing()">Editar Contacto</button>
     <button *ngIf="!isEditing" (click)="mostrarModalEliminar()">Eliminar Contacto</button>
   
-    <!-- Modal de eliminación -->
+  
     <div *ngIf="mostrarModal" class="modal">
       <p>¿Estás seguro de que deseas eliminar este contacto?</p>
       <button (click)="eliminarContacto()">Eliminar</button>
