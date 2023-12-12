@@ -2,7 +2,7 @@ import { User } from './user';
 
 export interface ISession {
   expiresIn: string;
-  token?: string;
+  token: string;
 }
 
 export interface IMeData {

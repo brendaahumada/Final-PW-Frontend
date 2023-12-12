@@ -15,6 +15,7 @@ import { ContactDetailsComponent } from './public/pages/contact-details/contact-
 import { LocationComponent } from './public/pages/location/location.component';
 import { LocationDetailsComponent } from './public/pages/location-details/location-details.component';
 import { HomeComponent } from './public/pages/home/home.component';
+import { AuthGuard } from './guards/auth.guard';
 
 
 
@@ -39,7 +40,7 @@ import { HomeComponent } from './public/pages/home/home.component';
     FormsModule,
     CommonModule
   ],
-  providers: [],
+  providers: [AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

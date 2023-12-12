@@ -75,6 +75,17 @@ export class AuthService {
     return true;
   } 
 
+  isAuthenticated(): boolean {
+    const session: ISession = this.getSession();
+    const now = new Date().toISOString();
+  
+    if (session && session.token && session.expiresIn) {
+      return session.expiresIn > now;
+    }
+  
+    return false;
+  }
+  
   getSession(): ISession {
     const item: string = localStorage.getItem('session') || 'invalid';
     if (item !== 'invalid') {

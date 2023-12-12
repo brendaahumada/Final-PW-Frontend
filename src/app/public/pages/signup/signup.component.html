@@ -1,59 +1,102 @@
 <div class="container">
-    <h1 class="Registrarse-header">Mi agenda virtual</h1>
-    <form (ngSubmit)="register(form)" #form="ngForm" class="Registrarse-Form">
-      <div class="inputs">
-        <label for="Nombre">Nombre</label>
-        <input
-          type="text"
-          name="nombre"
-          id="nombre"
-          autocomplete="nombre"
-          placeholder="Ingese su nombre"
-          [(ngModel)]="authData.name"
-          #name="ngModel"
-        />
+  <h1 class="Registrarse-header">Mi agenda virtual</h1>
+  <!-- El formulario utiliza la directiva ngSubmit para llamar a la función register en el componente cuando se envía el formulario -->
+  <form (ngSubmit)="register(form)" #form="ngForm" class="Registrarse-Form">
+    <!-- Campo para el Nombre -->
+    <div class="inputs">
+      <label for="Nombre">Nombre</label>
+      <!-- Utiliza ngModel para vincular el valor del campo de entrada al modelo del componente -->
+      <input
+        type="text"
+        name="nombre"
+        id="nombre"
+        autocomplete="nombre"
+        placeholder="Ingrese su nombre"
+        [(ngModel)]="authData.name"
+        #name="ngModel"
+        required  
+      />
+      <!-- Muestra un mensaje de error si el campo es requerido y está vacío -->
+      <div *ngIf="name.invalid && (name.dirty || name.touched)">
+        <!-- <div *ngIf="name.errors.required"> -->
+          El nombre es obligatorio.
+        <!-- </div> -->
       </div>
-      <div class="inputs">
-        <label for="Apellido">Apellido</label>
-        <input
-          type="text"
-          name="apellido"
-          id="apellido"
-          autocomplete="apellido"
-          placeholder="Ingrese su apellido"
-          [(ngModel)]="authData.lastName"
-          #lastName="ngModel"
-        />
+    </div>
+
+    <!-- Campo para el Apellido -->
+    <div class="inputs">
+      <label for="Apellido">Apellido</label>
+      <input
+        type="text"
+        name="apellido"
+        id="apellido"
+        autocomplete="apellido"
+        placeholder="Ingrese su apellido"
+        [(ngModel)]="authData.lastName"
+        #lastName="ngModel"
+        required
+      />
+      <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)">
+          El apellido es obligatorio.
       </div>
-      <div class="inputs">
-        <label for="Email">Email</label>
-        <input
-          type="email"
-          name="email"
-          id="email"
-          autocomplete="email"
-          placeholder="Ingrese su email"
-          [(ngModel)]="authData.email"
-          #email="ngModel"
-          pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$"
-        />
+    </div>
+
+    <!-- Campo para el Email -->
+    <div class="inputs">
+      <label for="Email">Email</label>
+      <input
+        type="email"
+        name="email"
+        id="email"
+        autocomplete="email"
+        placeholder="Ingrese su email"
+        [(ngModel)]="authData.email"
+        #email="ngModel"
+        required
+        pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$"
+      />
+      <div *ngIf="email && (email.invalid && (email.dirty || email.touched))">
+        <div *ngIf="email.errors && email.errors['required']">
+          El email es obligatorio.
+        </div>
+        <div *ngIf="email.errors && email.errors['pattern']">
+          El email debe tener un formato válido.
+        </div>
       </div>
-      <div class="inputs">
-        <label for="Password">Contraseña</label>
-        <input
-          type="password"
-          name="password"
-          id="password"
-          autocomplete="Contraseña"
-          placeholder="Ingrese su contraseña"
-          [(ngModel)]="authData.password"
-          [minLength]="6"
-          #password="ngModel"
-        />
+      
+      
+
+    <!-- Campo para la Contraseña -->
+    <div class="inputs">
+      <label for="Password">Contraseña</label>
+      <input
+        type="password"
+        name="password"
+        id="password"
+        autocomplete="Contraseña"
+        placeholder="Ingrese su contraseña"
+        [(ngModel)]="authData.password"
+        minlength="6"
+        #password="ngModel"
+        required
+      />
+      <div *ngIf="password.invalid && (password.dirty || password.touched)">
+        <div *ngIf="password.errors?.['required']">
+          La contraseña es obligatoria.
+        </div>
+        <div *ngIf="password.errors?.['minlength']">
+          La contraseña debe tener al menos 6 caracteres.
+        </div>
       </div>
-      <div>
-        <button class="btn-registro btn-guardar" type="submit">Guardar</button>
-        <button class="btn-registro btn-cancelar" [routerLink]="['/']">
-          Cancelar
-        </button>
+    </div>
+
+    <div>
+      <button class="btn-registro btn-guardar" type="submit">Guardar</button>
+      <button class="btn-registro btn-cancelar" [routerLink]="['/']">
+        Cancelar
+      </button>
+    </div>
+ 
+
 </div>

@@ -9,6 +9,7 @@ import { AddContactComponent } from './public/components/add-contact/add-contact
 import { ContactDetailsComponent } from './public/pages/contact-details/contact-details.component';
 import { EditContactComponent } from './public/components/edit-contact/edit-contact.component';
 import { LocationDetailsComponent } from './public/pages/location-details/location-details.component';
+import { AuthGuard } from './guards/auth.guard';
 
 // Archivo que maneja el ruteo de toda la app o páginas
 const routes: Routes = [
@@ -37,12 +38,14 @@ const routes: Routes = [
 },
 {
     path:"signup",
-    component:SignupComponent
+    component:SignupComponent,
+    canActivate: [AuthGuard]
 
 },
 {
     path:"login",
-    component:LoginComponent
+    component:LoginComponent,
+    canActivate: [AuthGuard]
 }, 
 { path: 'agregar-contacto', 
 component: AddContactComponent 
